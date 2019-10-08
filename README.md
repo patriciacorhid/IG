@@ -1,2 +1,2 @@
 # IG
-Practicas de la Asignatura Informátuca Gráfica
+Practicas de la Asignatura Informática Gráfica
