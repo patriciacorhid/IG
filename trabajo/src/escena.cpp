@@ -185,7 +185,20 @@ Escena1::Escena1()
 // los objetos que se indican en los guiones de las práctica 2
 // .......
 
+Escena2::Escena2()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 2 .... " << flush ;
 
+   // añadir el objetos '.ply' a la lista de objetos de esta escena:
+   objetos.push_back( new MallaPLY("../recursos/plys/ant.ply") );
+   objetos.push_back( new MallaRevolPLY("../recursos/plys/peon.ply", 200));
+   objetos.push_back( new Cilindro(10, 20));
+   objetos.push_back( new Cono(10, 20));
+   objetos.push_back( new Esfera(20, 20));
+   
+   cout << "hecho." << endl << flush ;
+}
 
 // -------------------------------------------------------------------------
 // COMPLETAR: Práctica 3

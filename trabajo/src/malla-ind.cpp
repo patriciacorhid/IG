@@ -378,6 +378,8 @@ MallaPLY::MallaPLY( const std::string & nombre_arch )
    ponerNombre( std::string("malla leída del archivo '") + nombre_arch + "'" );
 
    // COMPLETAR: práctica 2: leer archivo PLY e inicializar la malla
+   //Copia la info en las tabls vertices y triangulos
+   LeerPLY(nombre_arch, vertices, triangulos);
    // llamar a 'calcularNormales' para el cálculo de normales
    // ..........................
 

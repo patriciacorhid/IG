@@ -43,6 +43,30 @@ class MallaRevolPLY : public MallaRevol
                   const unsigned nperfiles ) ;
 } ;
 
+//---------------------------------------------------------------------------
 
+class Cilindro : public MallaRevol
+{
+   public:
+  Cilindro( const int num_verts_per, //número de vértices del perfil
+	    const unsigned nperfiles) ; //número de perfiles
+   
+} ;
+
+class Cono : public MallaRevol
+{
+   public:
+  Cono( const int num_verts_per, //número de vértices del perfil
+	    const unsigned nperfiles) ; //número de perfiles
+   
+} ;
+
+class Esfera : public MallaRevol
+{
+   public:
+  Esfera( const int num_verts_per, //número de vértices del perfil
+	    const unsigned nperfiles) ; //número de perfiles
+   
+} ;
 
 #endif
