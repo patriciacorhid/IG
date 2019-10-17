@@ -153,6 +153,10 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
       // 'true', forzar revisualizar escena.
       // .....
 
+     if(ProcesarTeclaAnimacion(objeto, key)){
+       revisualizar_escena = true;
+     }
+
       return ; // finalizar la f.g.e, ya que si está la tecla A pulsada no se mira ninguna otra tecla.
    }
 
@@ -437,6 +441,7 @@ void Inicializar( int argc, char *argv[] )
 
    escenas.push_back( new Escena1() );
    escenas.push_back( new Escena2() );
+   escenas.push_back( new Escena3() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5
    // hacer 'push_back' en el vector de escenas de instancias de 'Escena2',

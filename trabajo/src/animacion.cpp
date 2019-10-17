@@ -89,7 +89,7 @@ bool ProcesarTeclaAnimacion( Objeto3D * objeto, int glfw_key )
 
       case GLFW_KEY_DOWN :
          if ( ! animaciones_activadas )
-            objeto->modificarParametro( -1 );
+            objeto->modificarParametro( +1 );
          else
          {  cout << "No se puede modificar un parámetro con las animaciones activadas." << endl ;
             redisp = false ;

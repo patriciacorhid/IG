@@ -81,7 +81,24 @@ EntradaNGE::~EntradaNGE()
 void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
 {
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
-   // ........
+  
+  //guarda modelview actual
+  cv.cauce_act->pushMM();
+
+  //recorrer todas las entradas del array que hay en el nodo
+  for(unsigned i = 0; i< entradas.size(); i++){
+    switch( entradas[i].tipo ){
+    case TipoEntNGE::objeto:
+      entradas[i].objeto->visualizarGL(cv);
+      break;
+    case TipoEntNGE::transformacion:
+      cv.cauce_act->compMM( *(entradas[i].matriz));
+      break;
+    }
+  }
+
+  //restuara modelview guardada
+  cv.cauce_act->popMM();
 
 }
 
@@ -107,8 +124,10 @@ NodoGrafoEscena::NodoGrafoEscena()
 unsigned NodoGrafoEscena::agregar( const EntradaNGE & entrada )
 {
    // COMPLETAR: práctica 3: agregar la entrada al nodo, devolver índice de la entrada agregada
-   // ........
-   return 0 ; // sustituir por lo que corresponda ....
+
+  entradas.push_back(entrada);
+  
+  return entradas.size()-1 ;
 
 }
 // -----------------------------------------------------------------------------
@@ -139,9 +158,12 @@ Matriz4f * NodoGrafoEscena::leerPtrMatriz( unsigned indice )
 {
    // COMPLETAR: práctica 3: devolver puntero la matriz en ese índice
    //   (debe de dar error y abortar si no hay una matriz en esa entrada)
-   // ........(sustituir 'return nullptr' por lo que corresponda)
-   return nullptr ;
 
+  assert( indice < entradas.size() );
+  assert(entradas[indice].tipo==TipoEntNGE::transformacion);
+  assert( entradas[indice].matriz != nullptr );
+
+  return entradas[indice].matriz;;
 
 }
 // -----------------------------------------------------------------------------
