@@ -1,5 +1,5 @@
-#ifndef MODELO-JER_HPP
-#define MODELO-JER_HPP
+#ifndef MODELO_JER_HPP
+#define MODELO_JER_HPP
 
 #include "matrices-tr.h"
 #include "objeto3d.h"
@@ -9,12 +9,18 @@ class C: public NodoGrafoEscena {
 
  protected:
 
-  Matriz4f * mat_esc_cuerpo;
-  Matriz4f * mat_rot_cuerpo;
-  Matriz4f * mat_tra_cuerpo;
+  Matriz4f * mat_rot;
   
   Matriz4f * mat_esc_cabeza;
   Matriz4f * mat_tra_cabeza;
+
+  Matriz4f * mat_rot_ala1;
+  Matriz4f * mat_rot_ala2;
+
+  Matriz4f * mat_rot_pata1;
+  Matriz4f * mat_rot_pata2;
+  Matriz4f * mat_rot_pata3;
+  Matriz4f * mat_rot_pata4;
   
  public:
   C();
@@ -27,21 +33,14 @@ class Cuerpo: public NodoGrafoEscena {
 };
 
 class Cabeza: public NodoGrafoEscena {
-
 };
 
 
 class Ala: public NodoGrafoEscena{
+};
 
-  protected:
-  Matriz4f * mat_esc_ala;
-  Matriz4f * mat_rot_ala;
-  Matriz4f * mat_tra_ala;
-  
- public:
-  Ala();
-  unsigned leerNumParametros() const;
+class Pata: public NodoGrafoEscena{
 };
 
 
-#endif //MODELO-JER_HPP
+#endif //MODELO_JER_HPP
