@@ -11,8 +11,8 @@ class C: public NodoGrafoEscena {
 
   Matriz4f * mat_rot;
   
-  Matriz4f * mat_esc_cabeza;
-  Matriz4f * mat_tra_cabeza;
+  Matriz4f * mat_esc_luz;
+  Matriz4f * mat_tra_luz;
 
   Matriz4f * mat_rot_ala1;
   Matriz4f * mat_rot_ala2;
@@ -30,6 +30,9 @@ class C: public NodoGrafoEscena {
 };
 
 class Cuerpo: public NodoGrafoEscena {
+};
+
+class Luz: public NodoGrafoEscena {
 };
 
 class Cabeza: public NodoGrafoEscena {

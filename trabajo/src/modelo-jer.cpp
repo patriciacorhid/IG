@@ -25,23 +25,38 @@ C::C(){
 
   Cuerpo *cuerpo = new Cuerpo();
 
-   //Añadimos la cabeza
+  //Añadimos la cabeza
 
   Cabeza *cabeza = new Cabeza();
-  
-  i = cabeza->agregar(MAT_Traslacion(-3, 0, 0));
-  mat_tra_cabeza = cabeza->leerPtrMatriz(i);
-  
-  i = cabeza->agregar(MAT_Escalado(1, 1, 1));
-  mat_esc_cabeza = cabeza->leerPtrMatriz(i);
+
+  cabeza->agregar(MAT_Traslacion(3, 0, 0));
 
   Esfera * esfera_cabeza = new Esfera(20,20);
 
-  esfera_cabeza->ponerColor({0, 1, 0}); //Cabeza verde
+  esfera_cabeza->ponerColor({0, 0, 0}); //Cabeza negra
     
   cabeza->agregar(esfera_cabeza);
 
   cuerpo->agregar(cabeza);
+  
+
+  //Añadimos la lucecita
+
+  Luz *luz = new Luz();
+  
+  i = luz->agregar(MAT_Traslacion(-3, 0, 0));
+  mat_tra_luz = luz->leerPtrMatriz(i);
+  
+  i = luz->agregar(MAT_Escalado(1, 1, 1));
+  mat_esc_luz = luz->leerPtrMatriz(i);
+
+  Esfera * esfera_luz = new Esfera(20,20);
+
+  esfera_luz->ponerColor({1, 1, 0}); //Lucecita amarilla
+    
+  luz->agregar(esfera_luz);
+
+  cuerpo->agregar(luz);
 
   //Añadimos el ala1
 
@@ -99,7 +114,7 @@ C::C(){
 
   Esfera * esfera_pata1 = new Esfera(20,20);
 
-  esfera_pata1->ponerColor({1, 0, 1});
+  esfera_pata1->ponerColor({0, 0, 0});
 
   pata1->agregar(esfera_pata1);
 
@@ -123,7 +138,7 @@ C::C(){
 
   Esfera * esfera_pata2 = new Esfera(20,20);
 
-  esfera_pata2->ponerColor({1, 0, 0});
+  esfera_pata2->ponerColor({0, 0, 0});
 
   pata2->agregar(esfera_pata2);
 
@@ -147,7 +162,7 @@ C::C(){
 
   Esfera * esfera_pata3 = new Esfera(20,20);
 
-  esfera_pata3->ponerColor({0, 0, 1});
+  esfera_pata3->ponerColor({0, 0, 0});
 
   pata3->agregar(esfera_pata3);
 
@@ -171,7 +186,7 @@ C::C(){
 
   Esfera * esfera_pata4 = new Esfera(20,20);
 
-  esfera_pata4->ponerColor({0, 1, 1});
+  esfera_pata4->ponerColor({0, 0, 0});
 
   pata4->agregar(esfera_pata4);
 
@@ -183,7 +198,7 @@ C::C(){
 
   Esfera * esfera_cuerpo = new Esfera(20,20);
 
-  esfera_cuerpo->ponerColor({1, 1, 1});
+  esfera_cuerpo->ponerColor({0.4, 0.4, 0.2});
 
   cuerpo->agregar(esfera_cuerpo);
   
@@ -209,8 +224,8 @@ void C::actualizarEstadoParametro(const unsigned iParam, const float tSec ){
   case 0:
     //v = a + b*sen (a = posicion inicial, b = variación) 
     v = 1 + sin(2*M_PI*tSec)*0.5; //Radio de 1.5 a 0.5
-    *mat_esc_cabeza = MAT_Escalado(v, v, v);
-    *mat_tra_cabeza = MAT_Traslacion(-2-v, 0, 0);    
+    *mat_esc_luz = MAT_Escalado(v, v, v);
+    *mat_tra_luz = MAT_Traslacion(-2-v, 0, 0);    
     break;
   case 1:
     v = sin(2*M_PI*tSec)*45; //Rotacion de -45 a 45 
@@ -237,7 +252,7 @@ void C::actualizarEstadoParametro(const unsigned iParam, const float tSec ){
     *mat_rot_pata4 = MAT_Rotacion(v, 0, 0, 1);
     break;
   case 7:
-    v = tSec*90; //Rotación 360
+    v = -tSec*90; //Rotación 360
     *mat_rot = MAT_Rotacion(v, 0, 1, 0);
     break;
   }
