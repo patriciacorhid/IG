@@ -191,6 +191,50 @@ C::C(){
   pata4->agregar(esfera_pata4);
 
   cuerpo->agregar(pata4);
+
+  //Añadimos ojo1 a la libélula
+
+  Ojo *ojo1 = new Ojo();
+  
+  ojo1->agregar(MAT_Traslacion(3.9, 0.2,-0.4));
+
+  i = ojo1->agregar(MAT_Traslacion(0, 0, 0));
+  mat_tras_ojo1 = ojo1->leerPtrMatriz(i);
+
+  i = ojo1->agregar(MAT_Escalado(1, 1, 1));
+  mat_esc_ojo1 = ojo1->leerPtrMatriz(i);
+
+  ojo1->agregar(MAT_Escalado(0.2,0.2,0.2));
+
+  Esfera * esfera_ojo1 = new Esfera(20, 20);
+
+  esfera_ojo1->ponerColor({1, 1, 1});
+
+  ojo1->agregar(esfera_ojo1);
+
+  cuerpo->agregar(ojo1);
+
+  //Añadimos ojo2
+
+  Ojo *ojo2 = new Ojo();
+  
+  ojo2->agregar(MAT_Traslacion(3.9, 0.2, 0.4));
+
+  i = ojo2->agregar(MAT_Traslacion(0, 0, 0));
+  mat_tras_ojo2 = ojo2->leerPtrMatriz(i);
+
+  i = ojo2->agregar(MAT_Escalado(1, 1, 1));
+  mat_esc_ojo2 = ojo2->leerPtrMatriz(i);
+
+  ojo2->agregar(MAT_Escalado(0.2,0.2,0.2));
+
+  Esfera * esfera_ojo2 = new Esfera(20, 20);
+
+  esfera_ojo2->ponerColor({1, 1, 1});
+
+  ojo2->agregar(esfera_ojo2);
+
+  cuerpo->agregar(ojo2);
   
   //Añadimos el cuerpo de la libélula
   
@@ -205,6 +249,9 @@ C::C(){
   //Hacemos que se mueva la libélula alrededor del eje Y
   i = agregar(MAT_Rotacion(0, 0, 1, 0));
   mat_rot = leerPtrMatriz(i);
+
+  i = agregar(MAT_Traslacion(0, 0, 0));
+  mat_tras = leerPtrMatriz(i);
   
   agregar(MAT_Traslacion(0, 0, -3));
 
@@ -213,7 +260,7 @@ C::C(){
 }
 
 unsigned C::leerNumParametros() const{
-  return 8;
+  return 13;
 }
 
 void C::actualizarEstadoParametro(const unsigned iParam, const float tSec ){
@@ -252,9 +299,29 @@ void C::actualizarEstadoParametro(const unsigned iParam, const float tSec ){
     *mat_rot_pata4 = MAT_Rotacion(v, 0, 0, 1);
     break;
   case 7:
+    v = sin(2*M_PI*tSec)*0.2; //Traslación 
+    *mat_tras_ojo1 = MAT_Traslacion(0, 0, v);
+    break;
+  case 8:
+    v = 1 + sin(2*M_PI*tSec)*0.2;; //Escalado
+    *mat_esc_ojo1 = MAT_Escalado(v, v, v);
+    break;
+  case 9:
+    v = sin(2*M_PI*tSec)*0.2; //Traslación 
+    *mat_tras_ojo2 = MAT_Traslacion(0, 0, v);
+    break;
+  case 10:
+    v = 1 + sin(2*M_PI*tSec)*0.2; //Escalado
+    *mat_esc_ojo2 = MAT_Escalado(v, v, v);
+    break;    
+  case 11:
     v = -tSec*90; //Rotación 360
     *mat_rot = MAT_Rotacion(v, 0, 1, 0);
     break;
+  case 12:
+    v = sin(2*M_PI*tSec)*0.5; //Traslacion
+    *mat_tras = MAT_Traslacion(0, v, 0);
+    break; 
   }
   
 }

@@ -10,6 +10,7 @@ class C: public NodoGrafoEscena {
  protected:
 
   Matriz4f * mat_rot;
+  Matriz4f * mat_tras;
   
   Matriz4f * mat_esc_luz;
   Matriz4f * mat_tra_luz;
@@ -21,6 +22,11 @@ class C: public NodoGrafoEscena {
   Matriz4f * mat_rot_pata2;
   Matriz4f * mat_rot_pata3;
   Matriz4f * mat_rot_pata4;
+
+  Matriz4f * mat_tras_ojo1;
+  Matriz4f * mat_esc_ojo1;
+  Matriz4f * mat_tras_ojo2;
+  Matriz4f * mat_esc_ojo2;
   
  public:
   C();
@@ -45,5 +51,7 @@ class Ala: public NodoGrafoEscena{
 class Pata: public NodoGrafoEscena{
 };
 
+class Ojo: public NodoGrafoEscena{
+};
 
 #endif //MODELO_JER_HPP
