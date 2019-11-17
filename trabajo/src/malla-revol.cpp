@@ -37,7 +37,7 @@ void MallaRevol::inicializar
       float alpha = 2*M_PI*i/(n-1);
       float c = cos(alpha);
       float s = sin(alpha);
-      vertices.push_back({perfil[j][X]*c-perfil[j][Z]*s, perfil[j][Y], perfil[j][X]*s+perfil[j][Z]*c});
+      vertices.push_back({perfil[j][X]*c, perfil[j][Y], perfil[j][X]*s});
     }
   }
 
@@ -114,7 +114,7 @@ Esfera:: Esfera(
   std::vector<Tupla3f> perfil;
   
   for(int i=0; i < num_verts_per; i++){
-    float alpha = M_PI*i/(nperfiles-1);
+    float alpha = M_PI*i/(num_verts_per-1);
     float s= sin(alpha);
     float c= cos(alpha);
     
