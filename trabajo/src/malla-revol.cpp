@@ -50,8 +50,6 @@ void MallaRevol::inicializar
     }
   }
   
-
-
 }
 
 // -----------------------------------------------------------------------------
@@ -123,4 +121,55 @@ Esfera:: Esfera(
   }
 
   inicializar(perfil, nperfiles);
+}
+
+Pesa:: Pesa(const unsigned int nperfiles) // número de perfiles
+{
+  ponerNombre( std::string("Reloj de arena"));
+  
+  std::vector<Tupla3f> perfil;
+    
+  perfil.push_back({0, 1.5, 0});
+  perfil.push_back({1, 1.5, 0});
+  perfil.push_back({1, 1, 0});
+  perfil.push_back({0.5, 0.5, 0});
+  perfil.push_back({0.5, 0, 0});
+  perfil.push_back({0.5, -0.5, 0});
+  perfil.push_back({1, -1, 0});
+  perfil.push_back({1, -1.5, 0});
+  perfil.push_back({0, -1.5, 0});
+
+  inicializar(perfil, nperfiles);
+
+  ponerColor({0.6, 0, 0.3});
+}
+
+Polea:: Polea(
+   const int num_verts_per, //número de vértices del perfíl
+   const unsigned int nperfiles) // número de perfiles
+{
+  ponerNombre( std::string("Polea"));
+  
+  std::vector<Tupla3f> perfil;
+
+  perfil.push_back({0, -1.5, 0});
+  perfil.push_back({1.5, -1.5, 0});
+  perfil.push_back({1.5, -1, 0});
+  
+  for(int i=0; i < num_verts_per; i++){
+    float alpha = M_PI*i/(nperfiles-1);
+    float s= sin(alpha);
+    float c= cos(alpha);
+    
+    perfil.push_back({-s+1.5, -c, 0});
+    
+    }
+
+  perfil.push_back({1.5, 1, 0});
+  perfil.push_back({1.5, 1.5, 0});
+  perfil.push_back({0, 1.5, 0});
+
+  inicializar(perfil, nperfiles);
+
+  ponerColor({0, 1, 0});
 }

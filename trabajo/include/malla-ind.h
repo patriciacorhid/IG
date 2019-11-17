@@ -129,4 +129,13 @@ class CuboColores : public MallaInd
       CuboColores();
 };
 
+//Clase Diamante
+
+class Diamante : public MallaInd
+{
+   public:
+      Diamante();
+      Diamante(Tupla3f  nuevo_color);
+};
+
 #endif

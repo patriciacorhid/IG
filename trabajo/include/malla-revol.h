@@ -67,4 +67,19 @@ class Esfera : public MallaRevol
    
 } ;
 
+class Pesa : public MallaRevol
+{
+   public:
+  Pesa( const unsigned nperfiles) ; //número de perfiles
+   
+} ;
+
+class Polea : public MallaRevol
+{
+   public:
+  Polea( const int num_verts_per, //número de vértices del perfil
+	    const unsigned nperfiles) ; //número de perfiles
+   
+} ;
+
 #endif

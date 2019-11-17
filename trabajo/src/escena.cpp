@@ -11,6 +11,7 @@
 #include "materiales-luces.h"
 #include "seleccion.h"
 #include "modelo-jer.h"
+#include "malla-barrido.h"
 
 
 // -----------------------------------------------------------------------------------------------
@@ -229,5 +230,19 @@ Escena3::Escena3()
 // los objetos que se indican en los guiones de las práctica 5
 // .......
 
+EscenaPrueba::EscenaPrueba()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena prueba .... " << flush ;
+
+   objetos.push_back( new Diamante({0.5, 1, 1}));
+   objetos.push_back( new Diamante());
+   objetos.push_back( new Pesa(15));
+   objetos.push_back( new Polea(20, 20));
+   objetos.push_back( new Tunel(10, 20, 1, 5));
+   objetos.push_back( new MallaBarridoPLY("../recursos/plys/peon.ply", 20, -1, 4));
+   
+   cout << "hecho." << endl << flush ;
+}
 
 

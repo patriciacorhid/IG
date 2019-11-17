@@ -82,6 +82,12 @@ class Escena3 : public Escena
       Escena3() ;
 } ;
 
+class EscenaPrueba : public Escena
+{
+   public:
+      EscenaPrueba() ;
+} ;
+
 
 
 // -------------------------------------------------------------------------
