@@ -81,6 +81,8 @@ EntradaNGE::~EntradaNGE()
 void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
 {
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
+
+  const Tupla4f color_previo = leerFijarColVertsCauce( cv );
   
   //guarda modelview actual
   cv.cauce_act->pushMM();
@@ -99,6 +101,8 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
 
   //restuara modelview guardada
   cv.cauce_act->popMM();
+
+  glColor4fv( color_previo );
 
 }
 
