@@ -20,7 +20,8 @@ Escena::Escena()
 {
    // COMPLETAR: Práctica 4: inicializar 'col_fuentes' y 'material_ini'
    // ...
-
+  col_fuentes = new Col2Fuentes();
+  material_ini = new Material();
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
@@ -81,6 +82,17 @@ void Escena::visualizarGL( ContextoVis & cv )
       // * comprobar que existe el material inicial (material_ini)
       // * activar la colección de fuentes y el material inicial
       // ....
+          
+     cauce->fijarEvalMIL( true );
+     cauce->fijarEvalText( false );
+     
+     if(col_fuentes != nullptr){
+       col_fuentes->activar(*cauce);
+     }
+
+     if(material_ini != nullptr){
+       material_ini->activar(*cauce);
+     }
 
    }
    else // si la iluminación no está activada, deshabilitar MIL y texturas
@@ -222,7 +234,15 @@ Escena3::Escena3()
 // los objetos que se indican en los guiones de las práctica 4
 // .......
 
+Escena4::Escena4()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 4 .... " << flush ;
 
+   //objetos.push_back( new C());
+   
+   cout << "hecho." << endl << flush ;
+}
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 5

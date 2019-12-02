@@ -83,6 +83,11 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
 
   const Tupla4f color_previo = leerFijarColVertsCauce( cv );
+  Material * mat_previo;
+
+  if(cv.iluminacion){
+    mat_previo = cv.material_act;
+  }
   
   //guarda modelview actual
   cv.cauce_act->pushMM();
@@ -96,12 +101,21 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
     case TipoEntNGE::transformacion:
       cv.cauce_act->compMM( *(entradas[i].matriz));
       break;
+    case TipoEntNGE::material:
+      cv.material_act = entradas[i].material;
+      entradas[i].material->activar(*cv.cauce_act);
+      break;
     }
   }
 
   //restuara modelview guardada
   cv.cauce_act->popMM();
 
+  if(cv.iluminacion){
+    cv.material_act = mat_previo;
+    cv.material_act->activar(*cv.cauce_act);
+  }
+  
   glColor4fv( color_previo );
 
 }

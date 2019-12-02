@@ -22,6 +22,7 @@
 
 #include "matrices-tr.h"
 #include "materiales-luces.h"
+#include <math.h>
 
 using namespace std ;
 
@@ -34,7 +35,9 @@ Textura::Textura( const std::string & nombreArchivoJPG )
    // COMPLETAR: práctica 4: cargar imagen de textura
    // (las variables de instancia están inicializadas en la decl. de la clase)
    // .....
-
+  
+  imagen = LeerArchivoJPEG(nombreArchivoJPG.c_str(), ancho, alto );
+  
 }
 
 // ---------------------------------------------------------------------
@@ -46,6 +49,11 @@ void Textura::enviar()
    // COMPLETAR: práctica 4: enviar la imagen de textura a la GPU
    // y configurar parámetros de la textura (glTexParameter)
    // .......
+
+  glGenTextures(1, &ident_textura);
+  //Copia los bytes de la RAM y los pega en la GPU
+  gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, ancho, alto, GL_RGB, GL_UNSIGNED_BYTE, imagen);
+  enviada = true;
 
 }
 
@@ -69,6 +77,16 @@ void Textura::activar( Cauce & cauce  )
 {
    // COMPLETAR: práctica 4: enviar la textura a la GPU (solo la primera vez) y activarla
    // .......
+
+  if(!enviada){
+    enviar();
+  }
+
+  //Fija la textura actual al cauce
+  cauce.fijarEvalText(enviada, ident_textura);
+
+  //Fija parametros cauce relacionados con textura
+  cauce.fijarTipoGCT(modo_gen_ct, coefs_s, coefs_t);
 
 }
 // *********************************************************************
@@ -123,6 +141,11 @@ void Material::activar( Cauce & cauce )
 {
    // COMPLETAR: práctica 4: activar un material
    // .....
+  if(textura != nullptr){
+    textura->activar(cauce);
+  }
+
+  cauce.fijarParamsMIL({k_amb, k_amb, k_amb}, {k_dif, k_dif, k_dif}, {k_pse, k_pse, k_pse}, exp_pse );
 
 }
 //**********************************************************************
@@ -140,9 +163,7 @@ FuenteLuz::FuenteLuz( GLfloat p_longi_ini, GLfloat p_lati_ini, const Tupla3f & p
    longi     = longi_ini ;
    lati      = lati_ini ;
 
-   col_ambiente  = p_color ;
-   col_difuso    = p_color ;
-   col_especular = p_color ;
+   color = p_color ;
 
    //ind_fuente = -1 ; // la marca como no activable hasta que no se le asigne indice
 
@@ -224,6 +245,17 @@ void ColFuentesLuz::activar( Cauce & cauce )
    //    usar el cauce para activarlas)
    // .....
 
+  std::vector<Tupla3f> colores;
+  std::vector<Tupla4f> pos_dir;
+  Tupla4f pos;
+
+  for(int i=0; i<vpf.size(); i++){
+    colores.push_back(vpf[i]->color);
+    pos={cos(vpf[i]->longi),sin(vpf[i]->lati),sin(vpf[i]->longi),0.0};
+    pos_dir.push_back(pos.normalized());
+  }
+  
+  cauce.fijarFuentesLuz(colores, pos_dir);
 }
 
 // ---------------------------------------------------------------------

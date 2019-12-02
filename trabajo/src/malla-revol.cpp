@@ -27,9 +27,55 @@ void MallaRevol::inicializar
    const unsigned               num_copias  // número de copias del perfil
 )
 {
-   // COMPLETAR: Práctica 2: completar: creación de la malla....
+
   int m = perfil.size();
   int n = num_copias;
+  
+  //PRACTICA 4:
+  //Cálculo de las coordenadas de texturas
+  std::vector<float> d;
+
+  for(int i = 0; i < m-1; i++){
+    d.push_back(sqrt(pow(perfil[i+1][X]-perfil[i][X], 2) + pow(perfil[i+1][Y]-perfil[i][Y], 2)));
+  }
+
+  std::vector<float> t;
+
+  float suma = 0;
+  float total = 0;
+
+  for(int i = 0; i < m-1; i++){
+    total+=d[i];
+  }
+  
+  for(int i = 0; i < m-1; i++){
+    t.push_back(suma/total);
+    suma+=d[i];
+  }
+
+  t.push_back(1.0);
+
+  //Cálculo de las normales
+  std::vector<Tupla3f> nor_arist;
+  Tupla3f aux;
+
+  for(int i = 0; i < m-1; i++){
+    aux = perfil[i+1] - perfil[i];
+    nor_arist.push_back({aux[Y], -aux[X], 0});
+  }
+  
+  std::vector<Tupla3f> nor_ver_perfil;
+
+  nor_ver_perfil.push_back(nor_arist.front());
+  
+  for(int i = 1; i < m-1; i++){
+    aux = nor_arist[i-1]+ nor_arist[i];
+    nor_ver_perfil.push_back(aux.normalized());
+  }
+
+  nor_ver_perfil.push_back(nor_arist.back());
+  
+  // COMPLETAR: Práctica 2: completar: creación de la malla....
 
   //Creación tabla de vértices:
   for (int i = 0; i < n; i++){
@@ -38,6 +84,10 @@ void MallaRevol::inicializar
       float c = cos(alpha);
       float s = sin(alpha);
       vertices.push_back({perfil[j][X]*c, perfil[j][Y], perfil[j][X]*s});
+      //Añadimos las su normal
+      nor_ver.push_back({nor_ver_perfil[j][X]*c, nor_ver_perfil[j][Y], nor_ver_perfil[j][X]*s});
+      //Añadimos las coordenadas de textura
+      cc_tt_ver.push_back({(float) i/(n-1), 1-t[j]});
     }
   }
 

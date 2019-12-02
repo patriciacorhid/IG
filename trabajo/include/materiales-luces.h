@@ -185,10 +185,7 @@ class FuenteLuz
       lati ;      // latitud actual de la fuente direccional (en grados, entre -90 y 90)
 
    protected:
-   Tupla3f
-      col_ambiente,  // color de la fuente para la componente ambiental
-      col_difuso,    // color de la fuente para la componente difusa
-      col_especular; // color de la fuente para la componente especular
+    Tupla3f color;
    //GLenum
    //   ind_fuente ;// indice de la fuente de luz en el vector, se asigna al insertarlo
    float

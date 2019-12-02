@@ -141,7 +141,13 @@ void FGE_PulsarLevantarTecla( GLFWwindow* window, int key, int scancode, int act
       // 'ProcesaTeclaFuenteLuz', si devuelve 'true', forzar revisualizar escena.
       // .....
 
-      return ; // finalizar la f.g.e, ya que si está la tecla L pulsada no se mira ninguna otra tecla.
+     ColFuentesLuz * colF = escenas[ind_escena_act]->colFuentes();
+
+     if(ProcesaTeclaFuenteLuz(colF, key)){
+       revisualizar_escena = true;
+     }
+
+     return ; // finalizar la f.g.e, ya que si está la tecla L pulsada no se mira ninguna otra tecla.
    }
 
    // si está pulsada la tecla 'A', la tecla se procesa en 'animacion.cpp'
@@ -442,7 +448,8 @@ void Inicializar( int argc, char *argv[] )
    escenas.push_back( new Escena1() );
    escenas.push_back( new Escena2() );
    escenas.push_back( new Escena3() );
-   escenas.push_back( new EscenaPrueba() );
+   escenas.push_back( new Escena4() );
+   //escenas.push_back( new EscenaPrueba() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5
    // hacer 'push_back' en el vector de escenas de instancias de 'Escena2',
