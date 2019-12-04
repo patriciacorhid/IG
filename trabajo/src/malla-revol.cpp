@@ -70,7 +70,11 @@ void MallaRevol::inicializar
   
   for(int i = 1; i < m-1; i++){
     aux = nor_arist[i-1]+ nor_arist[i];
-    nor_ver_perfil.push_back(aux.normalized());
+
+    if(aux[X] != 0 or aux[Y] != 0  or aux[Z] != 0)
+      nor_ver_perfil.push_back(aux.normalized());
+    else
+      nor_ver_perfil.push_back({0.0, 0.0, 0.0});
   }
 
   nor_ver_perfil.push_back(nor_arist.back());

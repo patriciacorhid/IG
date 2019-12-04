@@ -12,6 +12,7 @@
 #include "seleccion.h"
 #include "modelo-jer.h"
 #include "malla-barrido.h"
+#include "latapeones.h"
 
 
 // -----------------------------------------------------------------------------------------------
@@ -87,11 +88,14 @@ void Escena::visualizarGL( ContextoVis & cv )
      cauce->fijarEvalText( false );
      
      if(col_fuentes != nullptr){
+       //std::cout<<"Activando colfuentes" << std::endl; 
        col_fuentes->activar(*cauce);
      }
 
      if(material_ini != nullptr){
-       material_ini->activar(*cauce);
+       //std::cout<<"Activando material" << std::endl;
+       cv.material_act = material_ini;
+       cv.material_act->activar(*cauce);
      }
 
    }
@@ -239,7 +243,7 @@ Escena4::Escena4()
    using namespace std ;
    cout << "Creando objetos de escena 4 .... " << flush ;
 
-   //objetos.push_back( new C());
+   objetos.push_back( new LataPeones());
    
    cout << "hecho." << endl << flush ;
 }

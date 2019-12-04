@@ -91,7 +91,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
   
   //guarda modelview actual
   cv.cauce_act->pushMM();
-
+  
   //recorrer todas las entradas del array que hay en el nodo
   for(unsigned i = 0; i< entradas.size(); i++){
     switch( entradas[i].tipo ){

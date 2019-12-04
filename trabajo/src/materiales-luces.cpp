@@ -141,6 +141,7 @@ void Material::activar( Cauce & cauce )
 {
    // COMPLETAR: práctica 4: activar un material
    // .....
+  
   if(textura != nullptr){
     textura->activar(cauce);
   }

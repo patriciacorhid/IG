@@ -50,6 +50,19 @@ void MallaInd::calcularNormalesTriangulos()
    // COMPLETAR: Práctica 4: creación de la tabla de normales de triángulos
    // ....
 
+   Tupla3f a, b, m;
+   
+   for(int i = 0; i < triangulos.size(); i++){
+     a = vertices[triangulos[i][1]] - vertices[triangulos[i][0]];
+     b = vertices[triangulos[i][2]] - vertices[triangulos[i][0]];
+     m = a.cross(b);
+
+     if(m[X] != 0 or m[Y] != 0  or m[Z] != 0)
+       nor_tri.push_back(m.normalized());
+     else
+       nor_tri.push_back({0.0, 0.0, 0.0});
+   }
+
 }
 
 
@@ -62,6 +75,24 @@ void MallaInd::calcularNormales()
    // se debe invocar en primer lugar 'calcularNormalesTriangulos'
    // .......
 
+  calcularNormalesTriangulos();
+
+  for(int i = 0; i<triangulos.size(); i++){
+    nor_ver.push_back({0.0, 0.0, 0.0});
+  }
+
+  for(int i = 0; i<triangulos.size(); i++){
+    for(int j = 0; i<3; j++){
+      nor_ver[triangulos[i][j]] = nor_ver[triangulos[i][j]] + nor_tri[i];
+    }
+  }
+
+  for(int i = 0; i<triangulos.size(); i++){
+    if(nor_ver[X] != 0 or nor_ver[Y] != 0  or nor_ver[Z] != 0)
+       nor_ver[i] = nor_ver[i].normalized();
+     else
+       nor_ver[i]={0.0, 0.0, 0.0};
+  }
 
 }
 
