@@ -1,5 +1,3 @@
-
-
 #include "ig-aux.h"
 #include "escena.h"
 
@@ -110,15 +108,55 @@ void Escena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: Práctica 1: visualizar el objeto actual ('objeto')
    objeto->visualizarGL(cv);
 
-
+   if(cv.visualizar_normales)
+     visualizarNormales(cv);
 
    // si hay un FBO, dibujarlo:
 
 }
 
+//------------------------------------------------------------------------------
 
+void Escena::visualizarNormales( ContextoVis & cv )
+{
+   // guardar y fijar los valores de algunos parámetros de configuración
+   bool ilum_prev = cv.iluminacion ;
+        // fco_prev  = cv.fijar_colores_objetos ;
 
+   // recuperar el objeto raiz de esta escena y comprobar que está ok.
+   assert( cv.cauce_act != nullptr );
+   Objeto3D * objeto = objetos[ind_objeto_actual] ; assert( objeto != nullptr );
 
+   // desactivar iluminación
+   cv.iluminacion = false ;
+   glColor3f( 1.0, 0.7, 0.7 );
+   cv.cauce_act->fijarEvalMIL( false );
+   cv.cauce_act->fijarEvalText( false );
+   cv.cauce_act->fijarModoSombrPlano( true ); // sombreado plano
+   glLineWidth( 2.9 );
+
+   // desactivar VAOs y VBOs
+   glBindVertexArray( 0 );
+   glBindBuffer( GL_ARRAY_BUFFER, 0 );
+   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+
+   // desactivar punteros a tablas de atributos (distinto de las posiciones)
+   glDisableClientState( GL_COLOR_ARRAY );
+   glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+   glDisableClientState( GL_NORMAL_ARRAY );
+
+   // habilitar puntero a tabla de vértices
+   glEnableClientState( GL_VERTEX_ARRAY );
+
+   // dibujar objeto raiz actual
+   cv.visualizando_normales = true ;   // hace que MallaInd::visualizarGL visualize las normales.
+   objetos[ind_objeto_actual]->visualizarGL( cv );
+   cv.visualizando_normales = false ;
+
+   // restaurar algunos parámetros en 'cv' a su estado previo a esta llamada
+   cv.iluminacion = ilum_prev ;
+
+}
 
 // -----------------------------------------------------------------------------------------------
 // pasa la cámara actual a la siguiente
@@ -243,6 +281,8 @@ Escena4::Escena4()
    using namespace std ;
    cout << "Creando objetos de escena 4 .... " << flush ;
 
+   objetos.push_back( new Cubo24());
+   objetos.push_back( new NodoCubo24());
    objetos.push_back( new LataPeones());
    
    cout << "hecho." << endl << flush ;

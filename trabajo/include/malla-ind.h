@@ -68,15 +68,14 @@ class MallaInd : public Objeto3D
       // visualizar con 'draw elements', en modo diferido, usando 'id_vao_md'
       void visualizarGL_MD_VAO( ContextoVis & cv );
 
+      // calculo de las normales de triángulos (solo si no están creadas ya)
+      void calcularNormalesTriangulos() ;
+      
       // normales de triángulos y vértices
       void calcularNormales();
 
-      // calculo de las normales de triángulos (solo si no están creadas ya)
-      void calcularNormalesTriangulos() ;
-
-
-
    public:
+      
       // crea una malla vacía (nombre: "malla indexada nueva vacía")
       MallaInd() ;
 
@@ -86,7 +85,7 @@ class MallaInd : public Objeto3D
       // visualizar el objeto con OpenGL
       virtual void visualizarGL( ContextoVis & cv ) ;
 
-
+      void visualizarNormales();
 
 
 } ;
@@ -129,13 +128,23 @@ class CuboColores : public MallaInd
       CuboColores();
 };
 
+//Cubo 24 vértices
+
+class Cubo24 : public MallaInd
+{
+   public:
+      Cubo24();
+};
+
 //Clase Diamante
 
 class Diamante : public MallaInd
 {
-   public:
-      Diamante();
-      Diamante(Tupla3f  nuevo_color);
+ public:
+  Diamante();
+  Diamante(Tupla3f  nuevo_color);
 };
+
+
 
 #endif

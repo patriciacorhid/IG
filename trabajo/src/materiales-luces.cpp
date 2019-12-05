@@ -52,6 +52,9 @@ void Textura::enviar()
 
   glGenTextures(1, &ident_textura);
   //Copia los bytes de la RAM y los pega en la GPU
+
+  glBindTexture( GL_TEXTURE_2D, ident_textura);
+  
   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, ancho, alto, GL_RGB, GL_UNSIGNED_BYTE, imagen);
   enviada = true;
 
