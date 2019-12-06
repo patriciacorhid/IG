@@ -13,6 +13,7 @@
 #include "malla-ind.h"
 #include "malla-revol.h"
 #include "practicas.h"
+#include "materiales-luces.h"
 #include <math.h>
 
 using namespace std ;
@@ -34,6 +35,10 @@ C::C(){
   Esfera * esfera_cabeza = new Esfera(20,20);
 
   esfera_cabeza->ponerColor({0, 0, 0}); //Cabeza negra
+
+  Textura * text_cabeza = new Textura("../trabajo/imgs/body.jpg");
+  Material * mat_cabeza = new Material(text_cabeza, 0.5, 0.5, 0.5, 0.5);
+  cabeza->agregar(mat_cabeza);
     
   cabeza->agregar(esfera_cabeza);
 
@@ -53,7 +58,11 @@ C::C(){
   Esfera * esfera_luz = new Esfera(20,20);
 
   esfera_luz->ponerColor({1, 1, 0}); //Lucecita amarilla
-    
+
+  Textura * text_luz = new Textura("../trabajo/imgs/light.jpg");
+  Material * mat_luz = new Material(text_luz, 0.5, 0.5, 0.5, 0.5);
+
+  luz->agregar(mat_luz);
   luz->agregar(esfera_luz);
 
   cuerpo->agregar(luz);
@@ -67,12 +76,16 @@ C::C(){
 
   ala1->agregar(MAT_Traslacion(0, 0, -2));
   
-  ala1->agregar(MAT_Escalado(0.6, 0.2, 2));
+  ala1->agregar(MAT_Escalado(0.6, 0.05, 2));
 
   Esfera * esfera_ala1 = new Esfera(20,20);
 
   esfera_ala1->ponerColor({0, 0.7, 1});
 
+  Textura * text_ala1 = new Textura("../trabajo/imgs/aa.jpg");
+  Material * mat_ala1 = new Material(text_ala1, 0.5, 0.5, 0.5, 0.5);
+
+  ala1->agregar(mat_ala1);
   ala1->agregar(esfera_ala1);
 
   cuerpo->agregar(ala1);
@@ -86,12 +99,16 @@ C::C(){
 
   ala2->agregar(MAT_Traslacion(0, 0, 2));
   
-  ala2->agregar(MAT_Escalado(0.6, 0.2, 2));
+  ala2->agregar(MAT_Escalado(0.6, 0.05, 2));
 
   Esfera * esfera_ala2 = new Esfera(20,20);
 
   esfera_ala2->ponerColor({0, 0.7, 1});
 
+  Textura * text_ala2 = new Textura("../trabajo/imgs/aa.jpg");
+  Material * mat_ala2 = new Material(text_ala2, 0.5, 0.5, 0.5, 0.5);
+
+  ala2->agregar(mat_ala2);
   ala2->agregar(esfera_ala2);
 
   cuerpo->agregar(ala2);
@@ -116,6 +133,10 @@ C::C(){
 
   esfera_pata1->ponerColor({0, 0, 0});
 
+  Textura * text_pata1 = new Textura("../trabajo/imgs/pata.jpg");
+  Material * mat_pata1 = new Material(text_pata1, 0.5, 0.5, 0.5, 0.5);
+
+  pata1->agregar(mat_pata1);
   pata1->agregar(esfera_pata1);
 
   cuerpo->agregar(pata1);
@@ -140,6 +161,10 @@ C::C(){
 
   esfera_pata2->ponerColor({0, 0, 0});
 
+  Textura * text_pata2 = new Textura("../trabajo/imgs/pata.jpg");
+  Material * mat_pata2 = new Material(text_pata2, 0.5, 0.5, 0.5, 0.5);
+
+  pata2->agregar(mat_pata2);
   pata2->agregar(esfera_pata2);
 
   cuerpo->agregar(pata2);
@@ -164,6 +189,10 @@ C::C(){
 
   esfera_pata3->ponerColor({0, 0, 0});
 
+  Textura * text_pata3 = new Textura("../trabajo/imgs/pata.jpg");
+  Material * mat_pata3 = new Material(text_pata3, 0.5, 0.5, 0.5, 0.5);
+
+  pata1->agregar(mat_pata3);
   pata3->agregar(esfera_pata3);
 
   cuerpo->agregar(pata3);
@@ -188,6 +217,10 @@ C::C(){
 
   esfera_pata4->ponerColor({0, 0, 0});
 
+  Textura * text_pata4 = new Textura("../trabajo/imgs/pata.jpg");
+  Material * mat_pata4 = new Material(text_pata1, 0.5, 0.5, 0.5, 0.5);
+
+  pata4->agregar(mat_pata4);
   pata4->agregar(esfera_pata4);
 
   cuerpo->agregar(pata4);
@@ -205,11 +238,16 @@ C::C(){
   mat_esc_ojo1 = ojo1->leerPtrMatriz(i);
 
   ojo1->agregar(MAT_Escalado(0.2,0.2,0.2));
+  ojo1->agregar(MAT_Rotacion(180, 0, 0, 1));
 
   Esfera * esfera_ojo1 = new Esfera(20, 20);
 
   esfera_ojo1->ponerColor({1, 1, 1});
 
+  Textura * text_ojo1 = new Textura("../trabajo/imgs/ojo.jpg");
+  Material * mat_ojo1 = new Material(text_ojo1, 0.5, 0.5, 0.5, 0.5);
+
+  ojo1->agregar(mat_ojo1);
   ojo1->agregar(esfera_ojo1);
 
   cuerpo->agregar(ojo1);
@@ -227,11 +265,15 @@ C::C(){
   mat_esc_ojo2 = ojo2->leerPtrMatriz(i);
 
   ojo2->agregar(MAT_Escalado(0.2,0.2,0.2));
+  ojo2->agregar(MAT_Rotacion(180, 0, 0, 1));
 
   Esfera * esfera_ojo2 = new Esfera(20, 20);
 
   esfera_ojo2->ponerColor({1, 1, 1});
+  Textura * text_ojo2 = new Textura("../trabajo/imgs/ojo.jpg");
+  Material * mat_ojo2 = new Material(text_ojo2, 0.5, 0.5, 0.5, 0.5);
 
+  ojo2->agregar(mat_ojo2);
   ojo2->agregar(esfera_ojo2);
 
   cuerpo->agregar(ojo2);
@@ -244,6 +286,10 @@ C::C(){
 
   esfera_cuerpo->ponerColor({0.4, 0.4, 0.2});
 
+  Textura * text_cuerpo = new Textura("../trabajo/imgs/body.jpg");
+  Material * mat_cuerpo = new Material(text_cuerpo, 0.5, 0.5, 0.5, 0.5);
+
+  cuerpo->agregar(mat_cuerpo);
   cuerpo->agregar(esfera_cuerpo);
   
   //Hacemos que se mueva la libélula alrededor del eje Y

@@ -147,6 +147,8 @@ void Material::activar( Cauce & cauce )
   
   if(textura != nullptr){
     textura->activar(cauce);
+  } else {
+    cauce.fijarEvalText(false, -1);
   }
 
   cauce.fijarParamsMIL({k_amb, k_amb, k_amb}, {k_dif, k_dif, k_dif}, {k_pse, k_pse, k_pse}, exp_pse );

@@ -103,8 +103,10 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
       cv.cauce_act->compMM( *(entradas[i].matriz));
       break;
     case TipoEntNGE::material:
-      cv.material_act = entradas[i].material;
-      entradas[i].material->activar(*cv.cauce_act);
+      if(cv.iluminacion){
+	cv.material_act = entradas[i].material;
+	entradas[i].material->activar(*cv.cauce_act);
+      }
       break;
     }
   }
