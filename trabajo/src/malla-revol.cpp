@@ -66,7 +66,11 @@ void MallaRevol::inicializar
   
   std::vector<Tupla3f> nor_ver_perfil;
 
-  nor_ver_perfil.push_back(nor_arist.front());
+  aux = nor_arist.front();
+  if(aux[X] != 0 or aux[Y] != 0  or aux[Z] != 0)
+      nor_ver_perfil.push_back(aux.normalized());
+    else
+      nor_ver_perfil.push_back({0.0, 0.0, 0.0});
   
   for(int i = 1; i < m-1; i++){
     aux = nor_arist[i-1]+ nor_arist[i];
@@ -77,7 +81,11 @@ void MallaRevol::inicializar
       nor_ver_perfil.push_back({0.0, 0.0, 0.0});
   }
 
-  nor_ver_perfil.push_back(nor_arist.back());
+  aux = nor_arist.back();
+  if(aux[X] != 0 or aux[Y] != 0  or aux[Z] != 0)
+      nor_ver_perfil.push_back(aux.normalized());
+    else
+      nor_ver_perfil.push_back({0.0, 0.0, 0.0});
   
   // COMPLETAR: Práctica 2: completar: creación de la malla....
 
@@ -91,7 +99,7 @@ void MallaRevol::inicializar
       //Añadimos las su normal
       nor_ver.push_back({nor_ver_perfil[j][X]*c, nor_ver_perfil[j][Y], nor_ver_perfil[j][X]*s});
       //Añadimos las coordenadas de textura
-      cc_tt_ver.push_back({(float) i/(n-1), 1-t[j]});
+      cc_tt_ver.push_back({1 - (float) i/(n-1), 1-t[j]});
     }
   }
 

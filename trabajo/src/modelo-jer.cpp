@@ -37,7 +37,7 @@ C::C(){
   esfera_cabeza->ponerColor({0, 0, 0}); //Cabeza negra
 
   Textura * text_cabeza = new Textura("../trabajo/imgs/body.jpg");
-  Material * mat_cabeza = new Material(text_cabeza, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_cabeza = new Material(text_cabeza, 0.8, 0.8, 0.8, 0.8);
   cabeza->agregar(mat_cabeza);
     
   cabeza->agregar(esfera_cabeza);
@@ -60,7 +60,7 @@ C::C(){
   esfera_luz->ponerColor({1, 1, 0}); //Lucecita amarilla
 
   Textura * text_luz = new Textura("../trabajo/imgs/light.jpg");
-  Material * mat_luz = new Material(text_luz, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_luz = new Material(text_luz, 0.8, 0.8, 0.8, 0.8);
 
   luz->agregar(mat_luz);
   luz->agregar(esfera_luz);
@@ -80,10 +80,10 @@ C::C(){
 
   Esfera * esfera_ala1 = new Esfera(20,20);
 
-  esfera_ala1->ponerColor({0, 0.7, 1});
+  esfera_ala1->ponerColor({0.8, 1, 1});
 
   Textura * text_ala1 = new Textura("../trabajo/imgs/aa.jpg");
-  Material * mat_ala1 = new Material(text_ala1, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_ala1 = new Material(text_ala1, 0.8, 0.8, 0.8, 0.8);
 
   ala1->agregar(mat_ala1);
   ala1->agregar(esfera_ala1);
@@ -103,10 +103,10 @@ C::C(){
 
   Esfera * esfera_ala2 = new Esfera(20,20);
 
-  esfera_ala2->ponerColor({0, 0.7, 1});
+  esfera_ala2->ponerColor({0.8, 1, 1});
 
   Textura * text_ala2 = new Textura("../trabajo/imgs/aa.jpg");
-  Material * mat_ala2 = new Material(text_ala2, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_ala2 = new Material(text_ala2, 0.8, 0.8, 0.8, 0.8);
 
   ala2->agregar(mat_ala2);
   ala2->agregar(esfera_ala2);
@@ -134,7 +134,7 @@ C::C(){
   esfera_pata1->ponerColor({0, 0, 0});
 
   Textura * text_pata1 = new Textura("../trabajo/imgs/pata.jpg");
-  Material * mat_pata1 = new Material(text_pata1, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_pata1 = new Material(text_pata1, 0.8, 0.8, 0.8, 0.8);
 
   pata1->agregar(mat_pata1);
   pata1->agregar(esfera_pata1);
@@ -162,7 +162,7 @@ C::C(){
   esfera_pata2->ponerColor({0, 0, 0});
 
   Textura * text_pata2 = new Textura("../trabajo/imgs/pata.jpg");
-  Material * mat_pata2 = new Material(text_pata2, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_pata2 = new Material(text_pata2, 0.8, 0.8, 0.8, 0.8);
 
   pata2->agregar(mat_pata2);
   pata2->agregar(esfera_pata2);
@@ -190,7 +190,7 @@ C::C(){
   esfera_pata3->ponerColor({0, 0, 0});
 
   Textura * text_pata3 = new Textura("../trabajo/imgs/pata.jpg");
-  Material * mat_pata3 = new Material(text_pata3, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_pata3 = new Material(text_pata3, 0.8, 0.8, 0.8, 0.8);
 
   pata1->agregar(mat_pata3);
   pata3->agregar(esfera_pata3);
@@ -218,7 +218,7 @@ C::C(){
   esfera_pata4->ponerColor({0, 0, 0});
 
   Textura * text_pata4 = new Textura("../trabajo/imgs/pata.jpg");
-  Material * mat_pata4 = new Material(text_pata1, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_pata4 = new Material(text_pata1, 0.8, 0.8, 0.8, 0.8);
 
   pata4->agregar(mat_pata4);
   pata4->agregar(esfera_pata4);
@@ -245,7 +245,7 @@ C::C(){
   esfera_ojo1->ponerColor({1, 1, 1});
 
   Textura * text_ojo1 = new Textura("../trabajo/imgs/ojo.jpg");
-  Material * mat_ojo1 = new Material(text_ojo1, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_ojo1 = new Material(text_ojo1, 0.8, 0.8, 0.8, 0.8);
 
   ojo1->agregar(mat_ojo1);
   ojo1->agregar(esfera_ojo1);
@@ -271,7 +271,7 @@ C::C(){
 
   esfera_ojo2->ponerColor({1, 1, 1});
   Textura * text_ojo2 = new Textura("../trabajo/imgs/ojo.jpg");
-  Material * mat_ojo2 = new Material(text_ojo2, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_ojo2 = new Material(text_ojo2, 0.8, 0.8, 0.8, 0.8);
 
   ojo2->agregar(mat_ojo2);
   ojo2->agregar(esfera_ojo2);
@@ -287,7 +287,7 @@ C::C(){
   esfera_cuerpo->ponerColor({0.4, 0.4, 0.2});
 
   Textura * text_cuerpo = new Textura("../trabajo/imgs/body.jpg");
-  Material * mat_cuerpo = new Material(text_cuerpo, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_cuerpo = new Material(text_cuerpo, 0.8, 0.8, 0.8, 0.8);
 
   cuerpo->agregar(mat_cuerpo);
   cuerpo->agregar(esfera_cuerpo);

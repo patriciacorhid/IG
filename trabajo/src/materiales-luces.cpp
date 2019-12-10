@@ -81,6 +81,8 @@ void Textura::activar( Cauce & cauce  )
    // COMPLETAR: práctica 4: enviar la textura a la GPU (solo la primera vez) y activarla
    // .......
 
+  glColor3f(1.0, 1.0, 1.0);
+
   if(!enviada){
     enviar();
   }
@@ -224,6 +226,8 @@ void FuenteLuz::actualizarLongi( const float incre )
 void FuenteLuz::actualizarLati( const float incre )
 {
    lati = lati + incre ;
+   using namespace std ;
+   cout << "incrementada latitud de una fuente de luz, nueva == " << lati << endl ;
 }
 
 //**********************************************************************
