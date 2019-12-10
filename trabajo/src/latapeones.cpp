@@ -35,7 +35,7 @@ LataPeones::LataPeones(){
   NodoGrafoEscena * nodo_peon1 = new NodoGrafoEscena;
 
   Textura * tex_peon1 = new Textura("../recursos/imgs/text-madera.jpg");
-  Material * mat_peon1 = new Material(tex_peon1, 0.5, 0.5, 0.5, 0.5);
+  Material * mat_peon1 = new Material(tex_peon1, 0.4, 0.6, 1, 40);
 
   MallaRevol * peon1 = new MallaRevolPLY("../recursos/plys/peon.ply", 20);
 
@@ -49,10 +49,10 @@ LataPeones::LataPeones(){
 
   NodoGrafoEscena * nodo_peon2 = new NodoGrafoEscena;
 
-  Material * mat_peon2 = new Material(0.5, 0.5, 0.5, 0.5);
+  Material * mat_peon2 = new Material(0.4, 1, 0.1, 5);
   MallaRevol * peon2 = new MallaRevolPLY("../recursos/plys/peon.ply", 20);
 
-  peon2->ponerColor({0.6, 0.6, 0.6});
+  peon2->ponerColor({0.9, 0.9, 0.9});
   nodo_peon2->agregar(mat_peon2);
   nodo_peon2->agregar(peon2);
   agregar(nodo_peon2);
@@ -62,11 +62,11 @@ LataPeones::LataPeones(){
   agregar(MAT_Traslacion(3, 0, 0));
 
   NodoGrafoEscena * nodo_peon3 = new NodoGrafoEscena;
-
-  Material * mat_peon3 = new Material(0.5, 0.5, 0.5, 0.5);
+  
+  Material * mat_peon3 = new Material(0.4, 0.2, 1, 10);
   MallaRevol * peon3 = new MallaRevolPLY("../recursos/plys/peon.ply", 20);
 
-  peon3->ponerColor({0.3, 0.3, 0.3});
+  peon3->ponerColor({0.2, 0.2, 0.2});
   nodo_peon3->agregar(mat_peon3);
   nodo_peon3->agregar(peon3);
   agregar(nodo_peon3);
@@ -81,8 +81,7 @@ Lata::Lata(){
   
   NodoGrafoEscena * nodo_psup = new NodoGrafoEscena;
 
-  Material * mat_psup = new Material(0.2, 0.8, 0.8, 0.5);
-  //Material * mat_psup = new Material(0, 0, 1, 0);
+  Material * mat_psup = new Material(0.5, 0.4, 1, 40);
 
   MallaRevol * psup = new MallaRevolPLY("../recursos/plys/lata-psup.ply", 20);
 
@@ -98,7 +97,7 @@ Lata::Lata(){
 
   NodoGrafoEscena * nodo_pinf = new NodoGrafoEscena;
 
-  Material * mat_pinf = new Material(0.2, 0.8, 0.8, 0.5);
+  Material * mat_pinf = new Material(0.5, 0.4, 1, 40);
 
   MallaRevol * pinf = new MallaRevolPLY("../recursos/plys/lata-pinf.ply", 20);
 
@@ -113,7 +112,7 @@ Lata::Lata(){
   NodoGrafoEscena * nodo_pcue = new NodoGrafoEscena;
 
   Textura * tex_pcue = new Textura("../recursos/imgs/lata-coke.jpg");
-  Material * mat_pcue = new Material(tex_pcue, 0.2, 0.8, 0.8, 0.5);
+  Material * mat_pcue = new Material(tex_pcue, 0.5, 0.4, 1, 40);
 
   MallaRevol * pcue = new MallaRevolPLY("../recursos/plys/lata-pcue.ply", 20);
 

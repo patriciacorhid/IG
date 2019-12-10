@@ -107,8 +107,8 @@ void MallaRevol::inicializar
   for (int i = 0; i < n-1; i++){
     for (int j = 0; j < m-1; j++){
       int k = i*m+j;
-      triangulos.push_back({k, k+m, k+m+1});
-      triangulos.push_back({k, k+m+1, k+1});
+      triangulos.push_back({k+m, k, k+m+1});
+      triangulos.push_back({k+m+1, k, k+1});
     }
   }
   
