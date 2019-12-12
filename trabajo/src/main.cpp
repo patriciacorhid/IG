@@ -449,6 +449,7 @@ void Inicializar( int argc, char *argv[] )
    escenas.push_back( new Escena2() );
    escenas.push_back( new Escena3() );
    escenas.push_back( new Escena4() );
+   escenas.push_back( new Escena5() );
    //escenas.push_back( new EscenaPrueba() );
 
    // COMPLETAR: Prácticas 2,3,4 y 5

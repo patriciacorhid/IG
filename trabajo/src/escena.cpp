@@ -24,7 +24,10 @@ Escena::Escena()
 
    // COMPLETAR: Práctica 5: hacer 'push_back' de varias camaras perspectiva u ortogonales,
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
-   camaras.push_back( new CamaraOrbitalSimple() );
+   //camaras.push_back( new CamaraOrbitalSimple() );
+  camaras.push_back( new Camara3Modos(true, {7.5, 0, 0}, 1.5, {0.0, 0.0, 0.0}, 80.0));
+  camaras.push_back( new Camara3Modos(false, {0.01, 7.5, 0.0}, 1.5, {0.0, 0.0, 0.0}, 80.0));
+  camaras.push_back( new Camara3Modos(true, {0, 0, 7.5}, 1.5, {0.0, 0.0, 0.0}, 80.0));
 
 }
 // -----------------------------------------------------------------------------------------------
@@ -293,6 +296,16 @@ Escena4::Escena4()
 // Añadir la implementación del constructor de la clase Escena5 para construir
 // los objetos que se indican en los guiones de las práctica 5
 // .......
+
+Escena5::Escena5()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 5 .... " << flush ;
+
+   objetos.push_back( new VariasLatasPeones());
+   
+   cout << "hecho." << endl << flush ;
+}
 
 EscenaPrueba::EscenaPrueba()
 {

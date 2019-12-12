@@ -9,12 +9,6 @@
 
 
 class LataPeones: public NodoGrafoEscena {
-
- protected:
-
-  Matriz4f * mat_rot;
-  Matriz4f * mat_tras;
- 
   
  public:
   LataPeones();
@@ -23,7 +17,14 @@ class LataPeones: public NodoGrafoEscena {
 
 class Lata: public NodoGrafoEscena{
  public:
-  Lata();
+  Lata(const std::string nombre, const std::string & texturaJPG);
+};
+
+class VariasLatasPeones: public NodoGrafoEscena {
+
+ public:
+  VariasLatasPeones();
+
 };
 
 #endif //LATA_PEONES_HPP
