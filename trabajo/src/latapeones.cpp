@@ -74,7 +74,7 @@ LataPeones::LataPeones(){
   MallaRevol * peon3 = new MallaRevolPLY("../recursos/plys/peon.ply", 20);
 
   peon3->ponerNombre("Peón negro");
-  peon3->ponerIdentificador(13369446);
+  peon3->ponerIdentificador(13369446); //Rosa
   peon3->ponerColor({0.2, 0.2, 0.2});
 
   nodo_peon3->agregar(mat_peon3);

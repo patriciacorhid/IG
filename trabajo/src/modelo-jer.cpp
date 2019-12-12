@@ -22,6 +22,8 @@ using namespace std ;
 
 C::C(){
 
+  ponerNombre("Amelia");
+  
   int i;
 
   Cuerpo *cuerpo = new Cuerpo();
