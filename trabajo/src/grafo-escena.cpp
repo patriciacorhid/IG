@@ -89,6 +89,27 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
   if(cv.iluminacion){
     mat_previo = cv.material_act;
   }
+
+  if(cv.modo_seleccion){
+     //cv.iluminacion = false;
+     //cv.modo_visu = ModosVisu::relleno;
+     //cv.visualizando_normales = false;
+     //cv.dibujar_ejes = false;
+     //* Se configura en la función selección*
+
+     int id = leerIdentificador();
+
+     if(id != -1){
+       float r, g, b;
+       r = (float)((id&0xFF0000) >> 16) /255.0;
+       g = (float)((id&0xFF00) >> 8) /255.0;
+       b = (float)(id&0xFF) /255.0;
+
+       ponerColor({r, g, b});
+
+       //std::cout << "Leyendo identificador para poner colores en grafo-escena.cpp: " << leerColor() <<std::endl;
+     }
+   }
   
   //guarda modelview actual
   cv.cauce_act->pushMM();
@@ -198,7 +219,36 @@ void NodoGrafoEscena::calcularCentroOC()
    //    en coordenadas de objeto (hay que hacerlo recursivamente)
    //   (si el centro ya ha sido calculado, no volver a hacerlo)
    // ........
+  
+  if(centro_calculado)
+    return;
 
+  std::vector<Tupla3f> centros;
+  Matriz4f matriz = MAT_Ident();
+
+  for(unsigned i = 0; i< entradas.size(); i++){
+    switch( entradas[i].tipo ){
+    case TipoEntNGE::objeto:
+      entradas[i].objeto->calcularCentroOC();
+      centros.push_back(matriz*entradas[i].objeto->leerCentroOC());
+      break;
+    case TipoEntNGE::transformacion:
+      matriz = matriz*(*entradas[i].matriz);
+      break;
+    }
+  }
+
+  Tupla3f centro={0.0, 0.0, 0.0};
+
+  for(unsigned i = 0; i< centros.size(); i++){
+    centro = centro + centros[i];
+  }
+
+  centro = centro/(float)centros.size();
+
+  ponerCentroOC(centro); 
+  centro_calculado=true;
+  
 }
 // -----------------------------------------------------------------------------
 // método para buscar un objeto con un identificador y devolver un puntero al mismo
@@ -211,6 +261,8 @@ bool NodoGrafoEscena::buscarObjeto
    Tupla3f &         centro_wc   // (salida) centro del objeto en coordenadas del mundo
 )
 {
+
+  std::cout<<"BUSCANDO OBJETO"<<std::endl;
    assert( 0 < ident_busc );
 
    // COMPLETAR: práctica 5: buscar un sub-objeto con un identificador
@@ -218,16 +270,37 @@ bool NodoGrafoEscena::buscarObjeto
 
    // 1. calcula el centro del objeto, (solo la primera vez)
    // ........
-
+   calcularCentroOC();
 
    // 2. si el identificador del nodo es el que se busca, ya está (terminar)
    // ........
 
+   if(ident_busc == leerIdentificador()){
+     centro_wc = mmodelado*leerCentroOC();
+     *objeto = this;
+     
+     return true;
+   }
 
    // 3. El nodo no es el buscado: buscar recursivamente en los hijos
    //    (si alguna llamada para un sub-árbol lo encuentra, terminar y devolver 'true')
    // ........
 
+   bool encontrado = false;
+   Matriz4f matriz = mmodelado;
+
+   for(unsigned i = 0; i< entradas.size() and !encontrado; i++){
+     switch( entradas[i].tipo ){
+     case TipoEntNGE::objeto:
+       if(entradas[i].objeto->buscarObjeto(ident_busc, matriz, objeto, centro_wc)){
+	 encontrado = true;
+       }
+       break;
+     case TipoEntNGE::transformacion:
+       matriz = matriz*(*entradas[i].matriz);
+       break;
+     }
+   }
 
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;

@@ -336,12 +336,12 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // 5. Actualizar las coordenadas cartesianas a las nuevas
          // 6. Actualizar las coordenadas polares.
          // .....
-	Matriz4f* rotX = MAT_Rotacion(db, 1, 0, 0);
-	Matriz4f* rotY = MAT_Rotacion(-da, 0, 1, 0);
+	Matriz4f rotX = MAT_Rotacion(db, 1, 0, 0);
+	Matriz4f rotY = MAT_Rotacion(-da, 0, 1, 0);
 
-	Matriz4f rot((*rotY)*(rotX));
+	Matriz4f rot(rotY*rotX);
 
-	for(int i=0; i<3, i++){
+	for(int i=0; i<3; i++){
 	  eje[i]=rot*eje[i];
 	}
 
@@ -349,6 +349,10 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
 	org_cartesianas = rot*org_cartesianas;
 
 	Tupla3f desplazamiento = org_cartesianas - antiguas;
+	punto_atencion = punto_atencion + desplazamiento;
+
+	org_polares = Esfericas(org_cartesianas);
+	actualizarEjesMCV();
 
          break ;
       }
@@ -360,6 +364,11 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // .....
          // (nota: los ejes no cambian)
 
+	Tupla3f n = {da*0.02, db*0.02, 0};
+	punto_atencion = punto_atencion + n;
+	org_cartesianas = org_cartesianas + n;
+	org_polares = Esfericas(org_cartesianas);
+	
          break ;
       }
    }
@@ -382,6 +391,9 @@ void Camara3Modos::moverZ( const float dz )
          // nota: los ejes no cambian, ni el punto de atención
          // .....
 
+	org_polares[Z] = 1+(org_polares[Z]-1)*pow(1+0.1, dz);
+	org_cartesianas = Cartesianas(org_polares);
+
          break ;
       }
       case ModoCam::prim_pers_rot :
@@ -391,6 +403,10 @@ void Camara3Modos::moverZ( const float dz )
          // desplazar el punto de atención 'dz' unidades en el eje Z
          // nota: los ejes no cambian
          // .....
+
+	punto_atencion[Z] += dz;
+	org_cartesianas[Z] += dz;
+	org_polares = Esfericas(org_cartesianas);
 
          break ;
       }
@@ -402,18 +418,23 @@ void Camara3Modos::moverZ( const float dz )
 
 void Camara3Modos::mirarHacia( const Tupla3f & nuevo_punto_aten )
 {
-   // COMPLETAR: práctica 5
-   // Actualizar 'punto_atencion', desplazarlo al nuevo punto de atencion
-   // Actualizar las coordenadas cartesianas (desplazarlas)
-   // Actualizar las coordenadas polares a partir de las cartesianas
-   // Poner el modo actual en modo examinar
+  // COMPLETAR: práctica 5
+  // Actualizar 'punto_atencion', desplazarlo al nuevo punto de atencion
+  // Actualizar las coordenadas cartesianas (desplazarlas)
+  // Actualizar las coordenadas polares a partir de las cartesianas
+  // Poner el modo actual en modo examinar
 
+  org_cartesianas = org_cartesianas + nuevo_punto_aten - punto_atencion;
+  org_polares = Esfericas(org_cartesianas);
+  punto_atencion = nuevo_punto_aten;
 
-   // actualizar los ejes del marco de coordenadas del mundo
-   actualizarEjesMCV();
+  modo_actual = ModoCam::examinar;
 
-   // marcar las matrices como 'no actualizadas'
-   matrices_actualizadas = false ;
+  // actualizar los ejes del marco de coordenadas del mundo
+  actualizarEjesMCV();
+
+  // marcar las matrices como 'no actualizadas'
+  matrices_actualizadas = false ;
 }
 // ----------------------------------------------------------------------------
 // cambiar el modo de la camara al siguiente modo o al primero

@@ -61,16 +61,17 @@ void MallaRevol::inicializar
 
   for(int i = 0; i < m-1; i++){
     aux = perfil[i+1] - perfil[i];
-    nor_arist.push_back({aux[Y], -aux[X], 0});
+    Tupla3f aris = {aux[Y], -aux[X], 0};
+
+    if(aris[X] != 0 or aris[Y] != 0  or aris[Z] != 0)
+      nor_arist.push_back(aris.normalized());
+    else
+      nor_arist.push_back({0.0, 0.0, 0.0});
   }
   
   std::vector<Tupla3f> nor_ver_perfil;
 
-  aux = nor_arist.front();
-  if(aux[X] != 0 or aux[Y] != 0  or aux[Z] != 0)
-      nor_ver_perfil.push_back(aux.normalized());
-    else
-      nor_ver_perfil.push_back({0.0, 0.0, 0.0});
+  nor_ver_perfil.push_back(nor_arist.front());
   
   for(int i = 1; i < m-1; i++){
     aux = nor_arist[i-1]+ nor_arist[i];
@@ -81,11 +82,7 @@ void MallaRevol::inicializar
       nor_ver_perfil.push_back({0.0, 0.0, 0.0});
   }
 
-  aux = nor_arist.back();
-  if(aux[X] != 0 or aux[Y] != 0  or aux[Z] != 0)
-      nor_ver_perfil.push_back(aux.normalized());
-    else
-      nor_ver_perfil.push_back({0.0, 0.0, 0.0});
+  nor_ver_perfil.push_back(nor_arist.back());
   
   // COMPLETAR: Práctica 2: completar: creación de la malla....
 
