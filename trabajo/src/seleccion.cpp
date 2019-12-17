@@ -23,6 +23,8 @@ void FijarColVertsIdent( Cauce & cauce, const int ident )  // 0 ≤ ident < 2^24
    // COMPLETAR: práctica 5: fijar color actual de OpenGL usando 'ident' (glColor3ub)
    // .....
 
+  std::cout << "fijar col IDENTIFICADOR " << ident << std::endl;
+  
   const unsigned char byteR = ( ident ) % 0x100U,
     // rojo = byte menos significativo
     byteG = ( ident / 0x100U ) % 0x100U,
@@ -31,6 +33,7 @@ void FijarColVertsIdent( Cauce & cauce, const int ident )  // 0 ≤ ident < 2^24
     // azul = byte más significativo
   
   glColor3ub( byteR, byteG, byteB );
+  std::cout << "COLOR ACTUAL " << cauce.leerColorActual() << std::endl;
 
 }
 
@@ -51,7 +54,7 @@ int LeerIdentEnPixel( int xpix, int ypix )
   
   // reconstruir el indentificador y devolverlo:
 
-  std::cout << "EN LEER IDENT EN PIXEL" << bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) << std::endl;
+  std::cout << "EN LEER IDENT EN PIXEL " << bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) << std::endl;
   
   return bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) ;
 }
@@ -102,12 +105,15 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    //    ni texturas). Limpiar el FBO (color de fondo: 0)
    // .......
 
+   glClearColor(0.0,0.0,0.0,1.0);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
    fbo->activar(cv.ventana_tam_x, cv.ventana_tam_y);
    cv.cauce_act->activar();
    cv.cauce_act->fijarEvalMIL(false);
 
    glViewport( 0, 0, cv.ventana_tam_x, cv.ventana_tam_y);
-
+   
    // 4. Activar la cámara (se debe leer de la escena con 'camaraActual')
    // ....
 
@@ -143,7 +149,19 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    //   (usar 'buscarObjeto')
    // .....
 
+   Matriz4f matriz = MAT_Ident();
+   Objeto3D ** objeto = new Objeto3D*;
+   Tupla3f centro;
    
+   bool encontrado = escena->objetoActual()->buscarObjeto(id_pix, matriz , objeto , centro);
+
+   if(!encontrado){
+     std::cout<< "No se ha encontrado el objeto con identificador." << std::endl;
+     return false;
+   }
+
+   std::cout<< "Se ha encontrado el objeto con identificador " << (*objeto)->leerIdentificador() << ", nombre " << (*objeto)->leerNombre() << "." << std::endl;
+   escena->camaraActual()->mirarHacia(centro);
 
    // al final devolvemos 'true', ya que hemos encontrado un objeto
    return true ;

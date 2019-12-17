@@ -376,6 +376,7 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    // guardar el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
 
+   /*
    if(cv.modo_seleccion){
      //cv.iluminacion = false;
      //cv.modo_visu = ModosVisu::relleno;
@@ -385,15 +386,21 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 
      int id = leerIdentificador();
 
-     if(id != -1){
+     //Para ver yo los colores
+     /*if(id != -1){
        float r, g, b;
        r = (float)((id & 0xFF0000) >> 16) /255.0;
        g = (float)((id & 0xFF00) >> 8) /255.0;
        b = (float)(id & 0xFF) /255.0;
 
        ponerColor({r, g, b});
-     }
-   }
+       }
+
+     if(id != -1){
+       FijarColVertsIdent(cv.cauce_act, id);
+       }
+     
+   }*/
    
    if(cv.visualizando_normales)
      visualizarNormales();
