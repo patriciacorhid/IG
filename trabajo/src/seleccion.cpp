@@ -105,12 +105,12 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    //    ni texturas). Limpiar el FBO (color de fondo: 0)
    // .......
 
-   glClearColor(0.0,0.0,0.0,1.0);
-   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
    fbo->activar(cv.ventana_tam_x, cv.ventana_tam_y);
    cv.cauce_act->activar();
    cv.cauce_act->fijarEvalMIL(false);
+
+   glClearColor(0.0,0.0,0.0,1.0);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
    glViewport( 0, 0, cv.ventana_tam_x, cv.ventana_tam_y);
    

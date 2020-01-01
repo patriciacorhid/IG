@@ -91,12 +91,8 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
   }
 
   if(cv.modo_seleccion){
-     //cv.iluminacion = false;
-     //cv.modo_visu = ModosVisu::relleno;
-     //cv.visualizando_normales = false;
-     //cv.dibujar_ejes = false;
-     //* Se configura en la función selección*
 
+    //Poniendo colores para depurar
      int id = leerIdentificador();
 
      if(id != -1){
