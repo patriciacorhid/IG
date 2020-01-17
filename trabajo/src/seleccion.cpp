@@ -23,7 +23,7 @@ void FijarColVertsIdent( Cauce & cauce, const int ident )  // 0 ≤ ident < 2^24
    // COMPLETAR: práctica 5: fijar color actual de OpenGL usando 'ident' (glColor3ub)
    // .....
 
-  std::cout << "fijar col IDENTIFICADOR " << ident << std::endl;
+  //std::cout << "fijar col IDENTIFICADOR " << ident << std::endl;
   
   const unsigned char byteR = ( ident ) % 0x100U,
     // rojo = byte menos significativo
@@ -33,7 +33,7 @@ void FijarColVertsIdent( Cauce & cauce, const int ident )  // 0 ≤ ident < 2^24
     // azul = byte más significativo
   
   glColor3ub( byteR, byteG, byteB );
-  std::cout << "COLOR ACTUAL " << cauce.leerColorActual() << std::endl;
+  //std::cout << "COLOR ACTUAL " << cauce.leerColorActual() << std::endl;
 
 }
 
@@ -54,7 +54,7 @@ int LeerIdentEnPixel( int xpix, int ypix )
   
   // reconstruir el indentificador y devolverlo:
 
-  std::cout << "EN LEER IDENT EN PIXEL " << bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) << std::endl;
+  //std::cout << "EN LEER IDENT EN PIXEL " << bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) << std::endl;
   
   return bytes[0] + ( 0x100U*bytes[1] ) + ( 0x10000U*bytes[2] ) ;
 }
@@ -129,7 +129,7 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    // .....
 
    int id_pix = LeerIdentEnPixel(x, y);
-   cout << "El identificador: " << id_pix <<endl;
+   //cout << "El identificador: " << id_pix <<endl;
    
    // 7. Desactivar el framebuffer de selección
    // .....

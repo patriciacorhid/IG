@@ -35,7 +35,7 @@ LataPeones::LataPeones(){
     
   NodoGrafoEscena * nodo_peon1 = new NodoGrafoEscena;
 
-  Textura * tex_peon1 = new Textura("../recursos/imgs/text-madera.jpg");
+  Textura * tex_peon1 = new TexturaXY("../recursos/imgs/text-madera.jpg");
   Material * mat_peon1 = new Material(tex_peon1, 0.4, 0.6, 1, 40);
 
   MallaRevol * peon1 = new MallaRevolPLY("../recursos/plys/peon.ply", 20);

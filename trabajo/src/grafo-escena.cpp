@@ -258,7 +258,7 @@ bool NodoGrafoEscena::buscarObjeto
 )
 {
 
-  std::cout<<"BUSCANDO OBJETO"<<std::endl;
+  //std::cout<<"BUSCANDO OBJETO"<<std::endl;
    assert( 0 < ident_busc );
 
    // COMPLETAR: práctica 5: buscar un sub-objeto con un identificador
